@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>登录</title>
+		<include file="Public/include"/>
+	</head>
+	<body>
+		<div class="container" style="width:20%;margin-top:10%">
+			<div class="clearfix">
+				<form action="" method="POST" role="form">
+					<legend>登录-admin</legend>
+				
+					<div class="form-group">
+						<label for="">用户名</label>
+						<input type="text" class="form-control" id="" name="username" placeholder="username">
+					</div>
+					<div class="form-group">
+						<label for="">密码</label>
+						<input type="text" class="form-control" id="" name="password" placeholder="password">
+					</div>
+
+					<a href="{:U('admin_index')}" type="button" class="btn btn-primary">登录</a>
+					<button type="button" class="btn btn-success">微信登录</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

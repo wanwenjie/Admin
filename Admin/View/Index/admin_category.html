@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Admin-后台管理系统-分类设置</title>
+		<include file="Public/include"/>
+		<style>
+			input{
+				text-align:center;
+			}
+		</style>
+	</head>
+<!-- 右边列表 -->
+	<body>
+		<include file="Public/header"/>
+		<include file="Public/left"/>
+		<div class="col-xs-10 col-sm-8 col-lg-10" >
+			<div class="clearfix">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>编号、名称</th>
+							<th>排序</th>
+							<th>中文名</th>
+							<th>英文名</th>
+							<th>分类页模板</th>
+							<th>内容页模板</th>
+							<th>播放页模板</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<volist name="info" id="type">
+						<tr>
+							<td>{$type.t_id}、{$type.t_name}</td>
+							<td><input type="text" value="{$type.t_sort}" style="width:35px;"></td>
+							<td><input type="text" value="{$type.t_name}" style="width:75px;"></td>
+							<td><input type="text" value="{$type.t_enname}" style="width:75px;"></td>
+							<td><input type="text" value="{$type.t_tpl}" style="width:125px;"></td>
+							<td><input type="text" value="{$type.t_tpl_vod}" style="width:125px;"></td>
+							<td><input type="text" value="{$type.t_tpl_play}" style="width:125px;"></td>
+							<td><a href="">删除</a> | <a href="#modal-id" data-toggle="modal" style="color:#A65200;">添加</a> | <a href="" style="color:#8DC661;">更新</a></td>
+						</tr>
+					</volist>
+					</tbody>
+				</table>	
+			</div>
+		</div>
+		<div class="modal fade" id="modal-id">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">添加栏目</h4>
+					</div>
+					<div class="modal-body">
+						<form action="" method="POST" class="form-horizontal" role="form">
+						<h4>栏目信息</h4>	
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<td>父级栏目:</td>
+								<td>
+									<select name="t_pid" id="inputT_pid">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>名称:</td>
+								<td><input type="text" name="d_name">  &nbsp英文名: <input type="text" name="d_remarks"></td>
+							</tr>
+							<tr>
+								<td>排序:</td>
+								<td><input type="text" name="d_directed"></td>
+							</tr>
+							<tr>
+								<td>分类页:</td>
+								<td><input type="text" name="d_directed"></td>
+							</tr>
+							<tr>
+								<td>内容页:</td>
+								<td><input type="text" name="d_directed"></td>
+							</tr>
+							<tr>
+								<td>播放页:</td>
+								<td><input type="text" name="d_directed"></td>
+							</tr>
+						</tbody>
+					</table>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary">保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+	

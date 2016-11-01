@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Admin-后台管理系统-欢迎页面</title>
+		<include file="Public/include"/>
+	</head>
+<!-- 右边列表 -->
+	<body>
+		<include file="Public/header"/>
+		<include file="Public/left"/>
+		<div class="col-xs-10 col-sm-8 col-lg-10" >
+			<div class="clearfix">
+				<div class="clearfix">	
+						<h4>站点信息</h4>	
+						<table class="table table-bordered">
+							<tbody>
+								<tr>
+									<td>操作系统:</td>
+									<td>{:PHP_OS}</td>
+									<td>脚本解释引擎:</td>
+									<td>{$Think.server.SERVER_SOFTWARE}</td>
+								</tr>
+								<tr>
+									<td>服务器 (IP/端口):</td>
+									<td>{$Think.server.SERVER_NAME}</td>
+									<td>PHP版本:</td>
+									<td>{:PHP_VERSION}</td>
+								</tr>
+								<tr>
+									<td>允许上传文件最大值:</td>
+									<td>8M</td>
+									<td>ThinkPHP版本:</td>
+									<td>{$Think.version}</td>
+								</tr>
+								<tr>
+									<td>获取服务器的时间:</td>
+									<td>{:date("Y-m-d H:i:s", time())}</td>
+									<td>MySQL版本:</td>
+									<td>{$mysql_version}</td>
+								</tr>	
+							</tbody>
+						</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+	
