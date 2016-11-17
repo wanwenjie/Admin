@@ -1,0 +1,27 @@
+<div class="head">
+    <ul class="nav">
+
+
+
+  
+<li  {if-A:{maccms:siteaid}=10 }class="on" {endif-A}><a href="{maccms:path}">首页</a></li>
+{maccms:menu type=1,2,4,23}
+
+    <li {if-A:[menu:id]={maccms:curvodtypeid}} {endif-A}><a href="[menu:link]" {if-A:{maccms:curvodtypeid}=[menu:id]}class="on" {endif-A}>[menu:name]</a></li>
+
+ {/maccms:menu}
+
+
+    </ul>
+</div>
+<div class="top">
+    <div class="info">
+        <a href="#">关注微信号:dvdv222</a>
+    </div>
+    <div class="nav-search">
+        <form action="{maccms:link_search_vod}" method="POST" target="_blank">
+            <input type="text" value="输入片名搜索" onfocus="if (value =='输入片名搜索'){value =''}" onblur="if (value ==''){value='输入片名搜索'}" autocomplete="off" name="wd" class="input">
+            <input type="submit" value="搜索" class="imgbt"></form>
+    </div>
+</div>
+

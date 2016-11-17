@@ -10,4 +10,11 @@ use Think\Model;
 class VodTypeModel extends Model{
 	
 	protected $trueTableName = 'mac_vod_type';
+
+	//定义主键
+	protected $pk     		 = 't_id';
+	//自动完成
+	// protected $_auto = array(
+	// 	array('t_tpl_list','vod_list.html'),
+	// 	);
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>{maccms:name}-院线电影-最新上映大片-不用下载播放器免费在线观看</title>
+    <meta name="description" content="{maccms:name},院线电影,最新电影院上映电影,免费在线观看" />
+    <meta name="keywords" content="{maccms:name}提供了院线电影,第一时间观看电影院最新上映电影,完全免费观看" />
+    {maccms:include}
+<script src="{maccms:path_tpl}js/jquery-1.4.4.min.js"></script>
+<script src="{maccms:path_tpl}js/common.js"></script>
+<script src="{maccms:path_tpl}js/function.js"></script>
+<script src="{maccms:path_tpl}js/jquery.lazyload.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        {maccms:head}
+        <div class="main">
+            <div class="vlist">
+                <ul>
+                {maccms:vod num=100 by=time level=2 order=desc}
+                    <li class="vlist-con">
+                        <div class="img">
+                            <a href="[vod:playlink]" title="[vod:name]">
+                                <img class="lazy" data-original="[vod:pic]" src="http://ww4.sinaimg.cn/mw690/a94f43a1jw1f7pgv85n13g20ia0dpqa9.gif" alt="[vod:name]"> <b></b>
+                                <p>[vod:remarks]</p>
+                            </a>
+                        </div>
+                        <div class="vlist-name">
+                            <a href="[vod:playlink]" title="[vod:name]">
+                                <p>[vod:name]</p>
+                            </a>
+                        </div>
+                    </li>
+                {/maccms:vod}
+                </ul>
+            </div>
+        </div>
+        <div class="myad"></div>
+        {maccms:foot}
+    </div>
+</body>
+</html>

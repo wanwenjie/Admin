@@ -1,0 +1,226 @@
+				<table class="table">
+					<thead>
+						<tr>
+							<th>编号</th>
+							<th>名称</th>
+							<th>备注</th>
+							<th>分类</th>
+							<th>来源</th>
+							<th>推荐</th>
+							<th>浏览</th>
+							<th>更新时间</th>
+							<th>显隐</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<form class="fm">
+					<volist name="vodlist" id="vod">
+						<tr>
+							<td><input type="checkbox" value="{$vod.d_id}" class="cb" name="d_id[]">&nbsp{$vod.d_id}</td>
+							<td>{$vod.d_name}</td>
+							<td>{$vod.d_remarks}</td>
+							<td>{$vod.type}</td>
+							<td>{$vod.d_playfrom}</td>
+							<td><button type="button" class="btn btn-default" id="btnLevel_{$vod.d_id}" onclick="ajaxshow('btnd_level','btnLevel_{$vod.d_id}','{$vod.d_id}');">{$vod.d_level}</button></td>
+							<td><input type="checkbox" value=""></td>
+							<td>{$vod.d_maketime|date="Y-m-d h:i:s",###}</td>
+							<td>
+								<if condition="$vod.d_hide eq 0">
+									<button type="button" class="btn btn-default" id="btnHs_{$vod.d_id}" onclick="ajaxshow('btnd_hide','btnHs_{$vod.d_id}','{$vod.d_id}');">显示</button>
+								<else/>
+									<button type="button" class="btn btn-default" id="btnHs_{$vod.d_id}" onclick="ajaxshow('btnd_hide','btnHs_{$vod.d_id}','{$vod.d_id}');">隐藏</button>
+								</if>
+							</td>
+							<td>
+							<a onclick="del({$vod.d_id});">删除</a> | <a href="{:substr(U('admin_list_modify'),0,-5)}/d_id/{$vod.d_id}" style="color:#A65200;">修改</a> | <a href="" style="color:#8DC661;">更新</a>
+							</td>
+						</tr>
+					</volist>
+					</form>
+					</tbody>
+				</table>
+
+				<button type="button" class="btn btn-default" onclick="selectAll();">全选</button>&nbsp;
+				<button type="button" class="btn btn-default" onclick="adverseSelect();">反选</button>&nbsp;
+				<button type="button" class="btn btn-default" onclick="del();">删除</button>&nbsp;
+				<button type="button" class="btn btn-default" id="btnd_hide" onclick="ajaxshow('btnd_hide')">显隐</button>&nbsp;
+				<button type="button" class="btn btn-default" id="btnd_type" onclick="ajaxshow('btnd_type')">分类</button>&nbsp;
+				<button type="button" class="btn btn-default" id="btnd_level" onclick="ajaxshow('btnd_level')">推荐</button>&nbsp;
+				<button type="button" class="btn btn-default">生成</button>
+<div id="show"></div>
+<script>
+
+//创建显示框
+function createFrame(id,ids){
+	//创建选择框和button
+	switch (id){
+		case 'btnd_type':
+			if($('#val').get(0) == undefined){
+				var select = $('<select id="val" name="val"><option value>请选择分类</option><volist name="arr" id="type"><option value="{$type.t_id}">{$type.t_lev}{$type.t_name}</option></volist></select>').css('height','26px');
+			}
+		break;
+
+		case 'btnd_level':
+			if($('#val').get(0) == undefined){
+				var select = $('<select id="val" name="val"><option value>请选择推荐</option><option value="0">取消推荐</option><volist name="level" id="l"><option value="{$l}">推荐{$l}</option></volist></select>').css('height','26px');
+			}
+		break;
+
+		case 'btnd_hide':
+			if($('#val').get(0) == undefined){
+				var select = $('<select id="val" name="val"><option value>请选择显隐</option><option value="0">显示</option><option value="1">隐藏</option></select>').css('height','26px');
+			}
+		break;
+	}
+
+	if($('#certain').get(0) == undefined){
+		var certain = $('<button id="certain">确定</button>');
+		certain.click(function(){
+			//在这里进行无刷新提交
+			//只有三种：显隐，推荐，分类,可以根据传进来的id来判断
+			//选项：	0/1	,0-5,d_type,
+			//遍历select,获取选好的值
+			var val = '';
+			var select = $('select[name="val"] option:selected');
+			val = select.val();
+			type = id.substr(3);
+			$.ajax({
+					type:'post',
+					url :'{:U("admin_list_update")}',
+					data:'d_id='+ids+'&'+type+'='+val,
+					success:function(response,status){
+						$('#show').html(response);
+						$('.popover').remove();
+						location.reload();
+					},
+				});
+		});
+	}
+
+	if($('#cancel').get(0) == undefined){
+		var cancel = $('<button id="cancel">取消</button>');
+		cancel.click(closeP);
+	}
+
+	if($('.popover-content').get(0) == undefined){
+		var content = $('<div class="popover-content"></div>')
+		.append(select,certain,cancel);
+	}
+
+	if($('.arrow').get(0) == undefined){
+		var arrow = $('<div class="arrow"></div>').css('top','50%');
+	}
+
+	if($('.popover').get(0) == undefined){
+		$('<div class="popover left"></div>')
+		.css('top','')
+		.css('left','')
+		.css('position','absolute')
+		.css('display','block')
+		.appendTo('body').append(arrow,content);	
+	}
+
+}
+
+//ajax 方式显示刷新框
+function ajaxshow(id,lid='',d_id=''){
+	//遍历checkbox,看看是否有选中
+	var ids = '';
+	if(d_id != ''){
+		ids = d_id;
+	}else{
+		ids = getCheckboxVal();
+	}
+	if(ids != ''){
+		if(lid == ''){
+			var name = $('#'+id);
+		}else{
+			var name = $('#'+lid);
+		}
+		
+		var offset = name.offset();
+		createFrame(id,ids);
+		$('.popover').css('top',(offset.top-5)+'px').css('left',(offset.left-214)+'px');
+		//$('.popover-content').html('正在加载....');		
+	}else{
+		alert('至少选中一项');
+	}
+
+
+}
+
+//获取checkbox的值
+function getCheckboxVal(){
+	var ids = '';
+	$('input[name="d_id[]"]').each(function(){
+		if(this.checked){
+			ids = ids + this.value + ',';
+		}
+	});
+	return ids;
+}
+
+//取消
+function closeP(){
+	$('.popover').remove();
+}
+
+//提交
+// function ajaxSubmit(ids){
+// 	alert(ids);
+// }
+
+function selectAll(){
+	var cb = document.getElementsByClassName('cb');
+	for (var i = cb.length - 1; i >= 0; i--) {
+		//全选功能
+		if(!cb[i].checked){
+			cb[i].checked = true;
+		}		
+	}
+}
+
+//反选，与所有当前已选择的相反
+function adverseSelect(){
+	var cb = document.getElementsByClassName('cb');
+	for (var i = 0; i <= cb.length - 1; i++) {
+		if(cb[i].checked){
+			cb[i].checked = false;
+		}else cb[i].checked = true;
+	}
+}
+
+//删除以及批量删除功能
+function del(id=''){
+
+	var ids = '';
+	if(id == ''){
+		//批量删除，获取选择id
+		//遍历多选框，分析其值，获得id
+		ids = getCheckboxVal();
+	}else{
+		ids = id;
+	}
+	//ajax 提交
+	if(ids != ''){
+
+		if(!confirm('确实要删除吗')){
+			return false;
+		}else{
+				$.ajax({
+					type:'post',
+					url :'{:U("admin_list")}',
+					data:'d_id='+ids,
+					success:location.reload(),
+
+				});
+			}
+	}
+	else{
+		alert('请至少选择一项');
+	}
+
+}
+
+</script>

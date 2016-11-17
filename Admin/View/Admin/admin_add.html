@@ -1,0 +1,220 @@
+<div id="show"></div>
+		<div class="col-xs-10 col-sm-8 col-lg-10" >
+			<div class="clearfix">
+				<div class="clearfix">	
+					<h4>视频信息</h4>
+					<form class="fm">
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<td>参数:</td>
+								<td>
+									<select name="d_type">
+										<option value="">请选择分类</option>
+										<volist name="arr" id="type">
+											<eq name="type.t_id" value="$data.d_type">
+												<option value="{$type.t_id}" selected>{$type.t_lev}{$type.t_name}</option>
+											<else/>
+												<option value="{$type.t_id}">{$type.t_lev}{$type.t_name}</option>
+											</eq>
+										</volist>
+									</select>
+									<span style="color:red;" class="d_type"></span>
+									<select name="d_level">
+										<option value="0">请选择推荐值</option>
+										<volist name="level" id="l">
+											<eq name="l" value="$data.d_level">
+												<option value="{$l}" selected>推荐{$l}</option>
+											<else/>
+												<option value="{$l}">推荐{$l}</option>
+											</eq>
+										</volist>
+									</select>
+									<select name="d_area">
+										<option value="">请选择地区</option>
+										<volist name="area" id="a">
+											<eq name="a" value="$data.d_area">
+												<option value="{$a}" selected>{$a}</option>
+											<else/>
+												<option value="{$a}">{$a}</option>
+											</eq>
+										</volist>
+									</select>
+									<select name="d_lang">
+										<option value="">请选择语言</option>
+										<volist name="lang" id="la">
+											<eq name="la" value="$data.d_lang">
+												<option value="{$la}" selected>{$la}</option>
+											<else/>
+												<option value="{$la}">{$la}</option>
+											</eq>
+										</volist>
+									</select>
+									<select name="d_hide">
+										<eq name="data.d_hide" value="1">
+											<option value="0">显示</option>
+											<option value="1" selected>隐藏</option>
+										<else/>
+											<option value="0" selected>显示</option>
+											<option value="1">隐藏</option>
+										</eq>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>名称:</td>
+								<td><input type="text" name="d_name" value="{$data.d_name}"><span style="color:red;" class="d_name"></span>  &nbsp备注: <input type="text" name="d_remarks" value="{$data.d_remarks}">&nbsp上映: <input type="text" name="d_year" value="{$data.d_year}"></td></td>
+							</tr>
+							<tr>
+								<td>导演:</td>
+								<td><input type="text" name="d_directed" value="{$data.d_directed}">  &nbsp演员: <input type="text" name="d_starring" value="{$data.d_starring}"></td>
+							</tr>
+							<tr>
+								<td>图片:</td>
+								<td><input type="text" name="d_pic" value="{$data.d_pic}" style="width:450px;" id="pic"> &nbsp<input type="file" style="display:inline-block;" id="file"><button type="button" class="btn btn-sm" onclick="upload()">上传</button>
+								<div class="thumbnail" style="position:absolute;left:450px;top:200px;width:10%;display: none;">
+									<img data-src="#" alt="" id="img">
+								</div>
+								</td>
+							</tr>
+							<tr id="player">
+								<td>播放地址:</td>
+								<td>播放器：
+									<select name="d_playfrom[]">
+										<volist name="player" id="p">
+											<eq name="p" value="$data.d_playfrom">
+												<option value="{$p}" selected>{$p}</option>
+											<else/>
+												<option value="{$p}">{$p}</option>
+											</eq>
+										</volist>
+									</select>
+									<a onclick="add()">添加另一项播放地址</a>
+									<a onclick="del(this);">删除</a>
+									<br/><br/>
+									<textarea name="d_playurl[]" id="" cols="30" rows="10" class="form-control">{$data.d_playurl|str_replace="#","\\r\\n",###}</textarea>
+								</td>
+							</tr>
+							</volist>
+							<tr>
+								<td>介绍:</td>
+								<td>
+								<div class="wrapper" style="width:95%;height:auto;">
+								<!-- 加载编辑器的容器 -->
+									<script id="container" name="d_content" type="text/plain">
+									    {$data.d_content}
+									</script>
+								</div>
+								</td>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<input type="button" class="btn btn-sm" value="保存" onclick="save()">
+					<button type="button" class="btn btn-sm">返回</button>
+					</form>	
+				</div>
+			</div>
+		</div>
+		<!-- 配置文件 -->
+	    <script type="text/javascript" src="__PUBLIC__/UEditor/ueditor.config.js"></script>
+	    <!-- 编辑器源码文件 -->
+	    <script type="text/javascript" src="__PUBLIC__/UEditor/ueditor.all.js"></script>
+	    <!-- 实例化编辑器 -->
+	    <script type="text/javascript">
+	        var ue = UE.getEditor('container');
+	    </script>
+		<script>
+
+function save(){
+	var xhr = new XMLHttpRequest();
+	xhr.open('post','{:U("admin_interface")}',true);
+	var fm = document.getElementsByClassName('fm')[0];
+	xhr.onreadystatechange = function (){
+		if(xhr.readyState == 4){
+			var jsonData = this.responseText;
+			//将json字符串转化为对象
+			if(jsonData == ''){
+				alert('添加电影成功');
+				return false;
+			}else{
+				var json = eval('('+jsonData+')');
+				if(json.d_type){
+					document.getElementsByClassName('d_type')[0].innerHTML = json.d_type;
+				}
+				if(json.d_name){
+					document.getElementsByClassName('d_name')[0].innerHTML = json.d_name;
+				}
+			}
+			
+		}
+	}
+	var fd = new FormData(fm);
+	xhr.send(fd);
+}
+
+//删除
+function del(obj){
+	var tr = obj.parentNode.parentNode;
+	var table = tr.parentNode;
+	table.removeChild(tr);
+}
+
+//添加一个
+function add(){
+	var str = '<tr>'+
+'								<td>播放地址:</td>'+
+'								<td>播放器：'+
+'									<select name="d_playfrom[]">'+
+'									       <option value="llj" selected>llj</option>'+
+'                                                                               <option value="link">link</option>'+
+'									</select>'+
+'									<a onclick="add()">添加另一项播放地址</a>'+
+'                                                                        <a onclick="del(this)">删除</a>'+
+'									<br/><br/>'+
+'									<textarea name="d_playurl[]" id="" cols="30" rows="10" class="form-control"></textarea>'+
+'								</td>'+
+'							</tr>';
+	var copyurl = $(str);
+	$('#player').after(copyurl);
+	
+}
+
+//上传图片
+function upload(){
+	var xhr = new XMLHttpRequest();
+	var pic = document.getElementById('file').files[0];
+	var fd = new FormData();
+	fd.append('pic',pic);
+	xhr.open('post','{:U("upload")}',true);
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4){
+			document.getElementById('pic').value = 'http://{$Think.server.SERVER_NAME}/Application/Admin/Uploads/'+this.responseText;
+			alert('上传成功');
+		}
+	}
+	xhr.send(fd);
+
+}
+
+
+window.onload = function(){
+	var thum = document.getElementsByClassName('thumbnail')[0];
+	var img = document.getElementById('img');	
+
+	//显示图片
+	pic.addEventListener('mouseover',function(){
+		var pic = document.getElementById('pic');
+		var url = pic.value;
+		if(url == ''){
+			return false;
+		}
+		thum.style.display = "block";
+		img.src = url;
+	},true);
+	pic.addEventListener('mouseout',function(){
+		thum.style.display = "none";
+	},true);
+}
+
+</script>

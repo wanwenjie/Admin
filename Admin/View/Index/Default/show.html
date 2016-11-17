@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<title>Document</title>
+	<script src="js/jquery-1.4.4.min.js"></script>
+</head>
+<style>
+	*{
+		margin:0;
+		padding:0;
+	}
+
+	.container{
+		margin:0 auto;
+		width:100%;
+		height:auto;
+		background:url(cssimg/flower2.png);
+	}
+.show { width: 80%; height: auto; position: absolute; background: #fff; border-radius: 6px; top: 10%; left: 10%; }
+.spanner { width: 100%; height: 70px; border-top-left-radius: 6px; border-top-right-radius: 6px; background: url(http://mn.dobe123.com/template/vooete/cssimg/flower2.png); background-repeat: no-repeat; background-size: 38%; background-color: #eee; }
+.close { display: inline-block; position: relative; float: right; right: -5px; top: 8px; width: 30px; height: 30px; background: url(http://mn.dobe123.com/template/vooete/cssimg/close.png);background-repeat: no-repeat; }
+.title { width: 50%; height: 70%; margin: 0 auto; padding-top: 30px; padding-left: 30px; text-align: center; color: #363D4C; }
+.content { width: 100%; height: 70%; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; }
+.detail { width: 90%; height: 80%; margin: 0 auto; padding: 15px 5px; }
+</style>
+<body>
+<div class="container">
+	
+</div>
+	<div class="show">
+		<div class="spanner">
+			<span class="close"></span>
+			<div class="title">
+				<h4>夜孔雀</h4>
+			</div>
+		</div>
+		<div class="content">
+			<div class="detail">
+				<article>
+				  <h4>简介:</h4>
+				  <p>Windows Internet Explorer 9（简称 IE9）于 2011 年 3 月 14 日发布.....Windows Internet Explorer 9（简称 IE9）于 2011 年 3 月 14 日发布.....Windows Internet Explorer 9（简称 IE9）于 2011 年 3 月 14 日发布.....Windows Internet Explorer 9（简称 IE9）于 2011 年 3 月 14 日发布.....Windows Internet Explorer 9（简称 IE9）于 2011 年 3 月 14 日发布.....Windows Internet Explorer 9（简称 IE9）于 2011 年 3 月 14 日发布.....Windows Internet Explorer 9（简称 IE9）于 2011 年 3 月 14 日发布.....Windows Internet Explorer 9（简称 IE9）于 2011 年 3 月 14 日发布.....Windows Internet Explorer 9（简称 IE9）于 2011 年 3 月 14 日发布.....</p>
+				</article>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+	window.onload = function (){
+		document.getElementsByClassName('close')[0].onclick = function(){
+			document.getElementsByClassName('show')[0].style.display = 'none';
+			$(".container").css({
+ "-webkit-filter": "blur(3px)",
+ 
+"-moz-filter": "blur(3px)",
+ 
+"-o-filter": "blur(3px)",
+ 
+"-ms-filter":"blur(3px)",
+ 
+"filter": "blur(3px)"
+  });
+
+
+		}
+			
+	}
+</script>

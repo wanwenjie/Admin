@@ -1,0 +1,73 @@
+
+<div class="col-xs-10 col-sm-8 col-lg-10" >
+	<div class="clearfix">
+		<table class="table">
+			<form id="fm" action="{:U('search')}" method="POST">
+				<tbody>
+					<tr>
+						<td>过滤条件:</td>
+						<td>
+							<select name="d_type" id="input">
+								<option value="">请选择分类</option>
+								<volist name="arr" id="type">
+								<eq name="type.t_id" value="$search.d_type">
+									<option value="{$type.t_id}" selected>{$type.t_lev}{$type.t_name}</option>
+								<else/>
+									<option value="{$type.t_id}">{$type.t_lev}{$type.t_name}</option>
+								</eq>
+								</volist>
+							</select>
+							<select name="d_level" id="input">
+								<option value="">请选择推荐值</option>
+								<volist name="level" id="l">
+									<eq name="l" value="$search.d_level">
+										<option value="{$l}" selected>推荐{$l}</option>
+									<else/>
+										<option value="{$l}">推荐{$l}</option>
+									</eq>
+								</volist>	
+							</select>
+							<select name="d_area" id="input"> .
+								<option value="">请选择地区</option>
+								<volist name="area" id="a">
+									<eq name="a" value="$search.d_area">
+										<option value="{$a}" selected>{$a}</option>
+									<else/>
+										<option value="{$a}">{$a}</option>
+									</eq>
+								</volist>
+							</select>
+							<select name="d_lang" id="input">
+								<option value="">请选择语言</option>
+								<volist name="lang" id="la">
+									<eq name="la" value="$search.d_lang">
+										<option value="{$la}" selected>{$la}</option>
+									<else/>
+										<option value="{$la}">{$la}</option>
+									</eq>
+								</volist>
+							</select>
+							<select name="d_hide" id="input">
+								<eq name="search.d_hide" value="1">
+									<option value="0">显示</option>
+									<option value="1" selected>隐藏</option>
+								<else/>
+									<option value="0" selected>显示</option>
+									<option value="1">隐藏</option>
+								</eq>
+							</select>
+							关键字：<input type="text" name="q" value="{$search.q|default=''}">&nbsp;<input type="submit" class="btn btn-sm" value="搜索">
+						</td>
+					</tr>
+				</tbody>
+			</form>
+		</table>
+
+	<include file="vod_list"/>	
+	</div>
+	<div class="clearfix">
+		<ul class="pagination">
+			{$page}
+		</ul>
+	</div>
+</div>

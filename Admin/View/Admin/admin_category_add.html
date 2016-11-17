@@ -1,0 +1,74 @@
+
+<div class="col-xs-10 col-sm-8 col-lg-10" >
+	<div class="clearfix">
+	<div id="show"></div>
+		<form id="fm" class="form-horizontal" role="form">
+			<h4>栏目信息</h4>	
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<td>父级栏目:</td>
+						<td>
+							<select name="t_pid" id="inputT_pid">
+								<option value="0">顶级分类</option>
+							<volist name="arr" id="type">
+								<eq name="type.t_id" value="$info.t_pid"><option value="{$type.t_id}" selected>{$type.t_lev}{$type.t_name}</option><else/><option value="{$type.t_id}">{$type.t_lev}{$type.t_name}</option></eq>
+							</volist>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>名称:</td>
+						<td><input type="text" name="t_name" value="{$info.t_name}">  &nbsp;&nbsp;英文名:&nbsp;<input type="text" name="t_enname" value="{$info.t_enname}"></td>
+					</tr>
+					<tr>
+						<td>排序:</td>
+						<td><input type="text" name="t_sort" value="{$info.t_sort}"></td>
+					</tr>
+					<tr>
+						<td>分类页:</td>
+						<td><input type="text" name="t_tpl" value="{$info.t_tpl}">
+						&nbsp;&nbsp;列表页:&nbsp;<input type="text" name="t_tpl_list" value="{$info.t_tpl_list}"></td>
+					</tr>
+					<tr>
+						<td>内容页:</td>
+						<td><input type="text" name="t_tpl_vod" value="{$info.t_tpl_vod}">
+						&nbsp;&nbsp;播放页:&nbsp;<input type="text" name="t_tpl_play" value="{$info.t_tpl_play}"></td>
+					</tr>
+					<tr>
+						<td>下载页:</td>
+						<td><input type="text" name="t_tpl_down" value="{$info.t_tpl_down}"></td>
+					</tr>
+					<tr>
+						<td>关键词:</td>
+						<td><input type="text" name="t_key" value="{$info.t_key}"></td>
+					</tr>
+					<tr>
+						<td>描述:</td>
+						<td><input type="text" name="t_des" value="{$info.t_des}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="button" class="btn btn-primary" value="保存" onclick="save()">
+		</form>
+	</div>
+</div>
+<script>
+
+function save(){
+	var xhr = new XMLHttpRequest();
+	xhr.open('post','{:U("admin_category_add")}',true);
+	var fm = document.getElementById('fm');
+	xhr.onreadystatechange = function (){
+		if(xhr.readyState == 4){
+			//document.getElementById('show').innerHTML = this.responseText;
+			alert('修改成功');
+		}
+	}
+	var fd = new FormData(fm);
+	fd.append('t_id','{:I("get.t_id")}');
+	xhr.send(fd);
+}
+
+
+</script>

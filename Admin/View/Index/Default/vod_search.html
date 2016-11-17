@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>{maccms:name}-搜索{maccms:name}站-</title>
+    <meta name="description" content="{maccms:name},搜索" />
+    <meta name="keywords" content="{maccms:name}提供了搜索功能" />
+    {maccms:include}
+<script src="{maccms:path_tpl}js/jquery-1.4.4.min.js"></script>
+<script src="{maccms:path_tpl}js/common.js"></script>
+<script src="{maccms:path_tpl}js/function.js"></script>
+<script src="{maccms:path_tpl}js/jquery.lazyload.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        {maccms:head}
+<div class="main">
+    <div class="title"><p>搜索结果：</p></div>
+    <div class="vlist">
+            <ul>
+                 {maccms:vod pagesize=24 order=desc by=time}
+                    <li class="vlist-con">
+                        <div class="img">
+                            <a href="[vod:playlink]" title="[vod:name]">
+                                <img class="lazy" data-original="[vod:pic]" src="http://ww4.sinaimg.cn/mw690/a94f43a1jw1f7pgv85n13g20ia0dpqa9.gif" alt="[vod:name]"> <b></b>
+                                <p>[vod:remarks]</p>
+                            </a>
+                        </div>
+                        <div class="vlist-name">
+                            <a href="[vod:playlink]" title="[vod:name]">
+                                <p>[vod:name]</p>
+                            </a>
+                        </div>
+                    </li>
+                {/maccms:vod}
+            </ul>
+    </div>
+</div>
+        <div id="menu">
+            <ul>
+               {maccms:pages len=0}
+            </ul>
+        </div>
+        <div class="myad"></div>
+        {maccms:foot}
+    </div>
+</body>
+</html>

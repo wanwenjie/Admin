@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>正在播放:[vod:name]-[vod:remarks]-电影在线观看-[vod:typename]-{maccms:name}</title>
+    <meta name="keywords" content="[vod:name],[vod:name]在线观看,[vod:name][vod:remarks]在线观看" />
+    <meta name="description" content="{maccms:name}提供[vod:name][vod:remarks]在线观看,由[vod:directed]导演,[vod:starring]主演,[vod:contenttext len=50]..." />
+    {maccms:include}
+    <script src="{maccms:path_tpl}js/jquery-1.4.4.min.js"></script>
+</head>
+<body>
+    <div id="shareImage" style="display: none;">
+        <img src="{maccms:path_tpl}images/7a63068fgw1f4rp8hgxx5j20b40b4jrd.jpg" />
+    </div>
+    <div class="wrap">
+
+        <div class="myad adtheme">
+            <a href="#">智商高的人3秒都能记住本站网址：{maccms:url} </a>
+        </div>
+
+        <div id="player">
+            <iframe width="100%" height="200px" frameborder=0 border=0 marginwidth=0 marginheight=0 scrolling=no src="play.php?from=[vod:playfrom]&[vod:playurlpath]"></iframe>
+        </div>
+        <div class="liulanqi">
+            <span>影片正在为您开启，请您耐心等待5-10秒！</span>
+        </div>
+        <div class="xian">
+            <a href="../index.html" class="wx">返回首页</a>
+            <a href="javascript:show();"class="jian">查看简介</a>
+        </div>
+        <div class="xuanji">
+            <ul>
+                {maccms:play}{maccms:url order=desc}
+                  <li><a href="[url:link]"rel="nofollow">[url:name]</a></li>
+                {/maccms:url}{/maccms:play}
+            </ul>
+        </div>
+        <div class="myad adewm">
+            <span>
+                <img src="http://www.76club.cn/upload/vod/2016-01-09/zhiwen.gif" width="100%">
+            </span>
+        </div>
+        <div class="gzh">
+            <a href="#">识别不了二维码的务必点击这里</a>
+        </div>
+
+        {maccms:foot}
+    </div>
+    <div class="show">
+        <div class="spanner">
+            <span class="close"></span>
+            <div class="title">
+                <h4>[vod:name]</h4>
+            </div>
+        </div>
+        <div class="content">
+            <div class="detail">
+                <article>
+                  <h4>导演:</h4>
+                  <span>[vod:directed]</span>
+                  <h4>主演:</h4>
+                  <span>[vod:starring]</span>
+                  <h4>年代:</h4>
+                  <span>[vod:year]</span>
+                  <h4>类型:</h4>
+                  <span>[vod:typename]</span>
+                  <h4>简介:</h4>
+                  <p>[vod:contenttext]</p>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    window.onload = function (){
+        document.getElementsByClassName('close')[0].onclick = function(){
+            document.getElementsByClassName('show')[0].style.display = 'none';
+            $(".wrap").css({
+ "-webkit-filter": "blur(0px)",
+ 
+"-moz-filter": "blur(0px)",
+ 
+"-o-filter": "blur(0px)",
+ 
+"-ms-filter":"blur(0px)",
+ 
+"filter": "blur(0px)"
+  });
+        }
+        document.getElementsByClassName('jian')[0].onclick = function(){
+            document.getElementsByClassName('show')[0].style.display = 'block';
+            $(".wrap").css({
+ "-webkit-filter": "blur(3px)",
+ 
+"-moz-filter": "blur(3px)",
+ 
+"-o-filter": "blur(3px)",
+ 
+"-ms-filter":"blur(3px)",
+ 
+"filter": "blur(3px)"
+  });
+
+
+        }
+
+            
+    }
+</script>

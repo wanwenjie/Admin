@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title><maccms:name/>_电影库_院线推荐_午夜电影_最新上映大片_不用下载播放器_电影电视剧免费在线观看</title>
+    <meta name="description" content="<maccms:description/>" />
+    <meta name="keywords" content="<maccms:keywords/>" />
+    <maccms:include/>
+    <script src="<maccms:path_tpl/>js/jquery-1.4.4.min.js"></script>
+    <script src="<maccms:path_tpl/>js/common.js"></script>
+    <script src="<maccms:path_tpl/>js/function.js"></script>
+    <script src="<maccms:path_tpl/>js/jquery.lazyload.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        <maccms:head/>
+        <div class="main">
+            <div class="vlist">
+                <div class="vlist-tit">
+                    <a href="http://<maccms:url/>/vodtypehtml/4.html"><span>热门午夜</span></a><a class="more" href="http://{maccms:url}/vodtypehtml/4.html">    更多></a>
+                </div>
+                <ul>
+                 <maccms:vod num="20" by="time" type='10' order="desc">
+                    <li class="vlist-con">
+                        <div class="img">
+                            <a href="[vod:playlink]" title="[vod:name]">
+                                <img class="lazy" data-original="[vod:pic]" src="http://ww4.sinaimg.cn/mw690/a94f43a1jw1f7pgv85n13g20ia0dpqa9.gif" alt="[vod:name]"> <b></b>
+                                <p>[vod:remarks]</p>
+                            </a>
+                        </div>
+                        <div class="vlist-name">
+                            <a href="[vod:playlink]" title="[vod:name]">
+                                <p>[vod:name]</p>
+                            </a>
+                        </div>
+                    </li>
+                </maccms:vod>
+                </ul>
+            </div>
+            <div class="vlist">
+                <div class="vlist-tit">
+                    <a href="http://{maccms:url}/vodtypehtml/1.html"><span>热门电影</span></a><a class="more" href="http://{maccms:url}/vodtypehtml/1.html">    更多></a>
+                </div>
+                <ul>
+                 <maccms:vod num='20' by='time' level='1,2' order='desc'>
+                    <li class="vlist-con">
+                        <div class="img">
+                            <a href="[vod:playlink]" title="[vod:name]">
+                                <img class="lazy" data-original="[vod:pic]" src="http://ww4.sinaimg.cn/mw690/a94f43a1jw1f7pgv85n13g20ia0dpqa9.gif" alt="[vod:name]"> <b></b>
+                                <p>[vod:remarks]</p>
+                            </a>
+                        </div>
+                        <div class="vlist-name">
+                            <a href="[vod:playlink]" title="[vod:name]">
+                                <p>[vod:name]</p>
+                            </a>
+                        </div>
+                    </li>
+                </maccms:vod>
+                </ul>
+            </div>
+        </div>   
+        <div class="myad"></div>
+        <maccms:foot/>
+    </div>
+</body>
+</html>
